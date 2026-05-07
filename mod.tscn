@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://d3vx10h68qqop"]
+
+[ext_resource type="Script" uid="uid://cylg1dfu2jter" path="res://mod.gd" id="1_p338d"]
+[ext_resource type="Texture2D" uid="uid://b15r7qe3r7s4g" path="res://art/enemyFlyingAlt_1.png" id="1_rq3rc"]
+[ext_resource type="Texture2D" uid="uid://ba71sxm8l2n2u" path="res://art/enemyFlyingAlt_2.png" id="2_p338d"]
+[ext_resource type="Texture2D" uid="uid://baf8kcm4pkfdf" path="res://art/enemySwimming_1.png" id="3_oaw6m"]
+[ext_resource type="Texture2D" uid="uid://dgp0nwri5g7hq" path="res://art/enemySwimming_2.png" id="4_dqnhv"]
+[ext_resource type="Texture2D" uid="uid://358bp4hjc1cd" path="res://art/enemyWalking_1.png" id="5_gggx0"]
+[ext_resource type="Texture2D" uid="uid://w0wyhiglg1wj" path="res://art/enemyWalking_2.png" id="6_2tude"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jedtc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_rq3rc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_p338d")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_oaw6m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_dqnhv")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_gggx0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2tude")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1av1j"]
+radius = 40.0
+height = 102.0
+
+[node name="Mod" type="RigidBody2D" unique_id=2001906785]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_p338d")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1236577448]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_jedtc")
+animation = &"walk"
+frame = 1
+frame_progress = 0.5204675
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1400945460]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_1av1j")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=2024257270]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
